@@ -1,0 +1,124 @@
+﻿@model List<KhaoSat.Models.Question>
+@{
+    ViewData["Title"] = "Bài test";
+    int employeeTestId = ViewBag.EmployeeTestId;
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<style>
+    .bg-warning-orange {
+        background-color: #FFA500 !important;
+        color: #fff;
+    }
+
+    .btn-warning-orange {
+        background-color: #FFB347;
+        color: #fff;
+        border: none;
+    }
+
+        .btn-warning-orange:hover {
+            background-color: #FFA500;
+            color: #fff;
+        }
+</style>
+
+<h2 class="mb-4" style="color:#FF8C00;">Bài test</h2>
+
+<form asp-action="SubmitTest" asp-controller="Employeetests" method="post">
+    <input type="hidden" name="employeeTestId" value="@employeeTestId" />
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var q = Model[i];
+        <div class="card mb-3">
+            <div class="card-header bg-warning-orange">
+                Câu @(i + 1): @q.Content
+            </div>
+            <div class="card-body">
+
+                @* Multiple Choice *@
+                @if (q.QuestionOptions != null && q.QuestionOptions.Any())
+                {
+                    bool multipleAnswers = q.QuestionOptions.Count(o => o.IsCorrect) > 1;
+                    foreach (var opt in q.QuestionOptions)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="@(multipleAnswers ? "checkbox" : "radio")"
+                                   name="answers[@q.QuestionId]@(multipleAnswers ? "[]" : "")"
+                                   value="@opt.OptionId" />
+                            <label class="form-check-label">@opt.OptionText</label>
+                        </div>
+                    }
+                }
+                @* True / False *@
+                else if (q.QuestionTrueFalse != null)
+                {
+                    <text>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answers[@q.QuestionId]" value="true" />
+                            <label class="form-check-label">Đúng</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answers[@q.QuestionId]" value="false" />
+                            <label class="form-check-label">Sai</label>
+                        </div>
+                    </text>
+                }
+                @* Matching *@
+                else if (q.QuestionMatchings != null && q.QuestionMatchings.Any())
+                {
+                    <h6>Matching</h6>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Left Item</th>
+                                <th>Right Item</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int j = 0; j < q.QuestionMatchings.Count; j++)
+                            {
+                                var m = q.QuestionMatchings.ElementAt(j);
+                                <tr>
+                                    <td>@m.LeftItem</td>
+                                    <td>
+                                        <input type="text" class="form-control"
+                                               name="answers[@q.QuestionId][@j]"
+                                               placeholder="Nhập matching" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                @* Drag & Drop *@
+                else if (q.QuestionDragDrops != null && q.QuestionDragDrops.Any())
+                {
+                    <h6>Drag & Drop</h6>
+                    @for (int j = 0; j < q.QuestionDragDrops.Count; j++)
+                    {
+                        var d = q.QuestionDragDrops.ElementAt(j);
+                        <div class="mb-2 d-flex gap-2 align-items-center">
+                            <span>@d.DraggableText</span>
+                            <input type="text" class="form-control"
+                                   name="answers[@q.QuestionId][@j]"
+                                   placeholder="Drop vào" />
+                        </div>
+                    }
+                }
+                @* Essay / Text *@
+                else
+                {
+                    <input type="text" class="form-control" name="answers[@q.QuestionId]" placeholder="Nhập câu trả lời" />
+                }
+
+            </div>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-warning-orange">Nộp bài</button>
+</form>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,0 +1,42 @@
+﻿@model KhaoSat.Models.Dtos.Department.DepartmentEditDto
+
+@{
+    ViewData["Title"] = "Chỉnh sửa phòng ban";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Chỉnh sửa phòng ban</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        @* Ẩn ID *@
+                        <input type="hidden" asp-for="DepartmentId" />
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label fw-bold">Tên phòng ban</label>
+                            <input asp-for="Name" class="form-control" placeholder="Nhập tên phòng ban..." />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-save"></i> Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,190 @@
+﻿@model KhaoSat.Models.ViewModel.QuestionCreateViewModel
+
+@{
+    ViewData["Title"] = "Tạo câu hỏi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="mb-3">➕ Tạo câu hỏi mới</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <!-- ===== Nhập câu hỏi thủ công ===== -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="card-title">✍️ Nhập thủ công</h4>
+
+            <!-- Nội dung câu hỏi -->
+            <div class="form-group mb-3">
+                <label asp-for="Content" class="form-label">Nội dung câu hỏi</label>
+                <textarea asp-for="Content" class="form-control" rows="3" placeholder="Nhập nội dung câu hỏi..."></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <!-- Loại câu hỏi -->
+            <div class="form-group mb-3">
+                <label asp-for="Type" class="form-label">Loại câu hỏi</label>
+                <select asp-for="Type" class="form-control" id="Type">
+                    <option value="">-- Chọn loại câu hỏi --</option>
+                    <option value="MCQ">Multiple Choice</option>
+                    <option value="TrueFalse">True / False</option>
+                    <option value="Matching">Matching</option>
+                    <option value="DragDrop">Drag & Drop</option>
+                    <option value="Essay">Essay</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+
+            <!-- Độ khó -->
+            <div class="form-group mb-3">
+                <label asp-for="Difficulty" class="form-label">Độ khó</label>
+                <select asp-for="Difficulty" class="form-control">
+                    <option value="">-- Chọn độ khó --</option>
+                    <option value="Intern">Intern</option>
+                    <option value="Fresher">Fresher</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Mid">Mid</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Lead">Lead</option>
+                </select>
+                <span asp-validation-for="Difficulty" class="text-danger"></span>
+            </div>
+
+            <!-- Role -->
+            <div class="form-group mb-3">
+                <label asp-for="Role" class="form-label">Role</label>
+                <select asp-for="Role" class="form-control">
+                    <option value="">-- Chọn Role --</option>
+                    <option value="Tester">Tester</option>
+                    <option value="BE">Backend</option>
+                    <option value="FE">Frontend</option>
+                    <option value="QA">QA</option>
+                    <option value="PM">Project Manager</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+
+            <!-- Skill -->
+            <div class="form-group mb-3">
+                <label asp-for="SkillName" class="form-label">Kỹ năng</label>
+                <input asp-for="SkillName" class="form-control" placeholder="Ví dụ: C#, React, SQL..." />
+                <span asp-validation-for="SkillName" class="text-danger"></span>
+            </div>
+
+            <!-- True / False -->
+            <div class="form-group mb-3" id="trueFalseSection" style="display:none;">
+                <label asp-for="TrueFalseAnswer" class="form-label">Đáp án True/False</label>
+                <select asp-for="TrueFalseAnswer" class="form-control">
+                    <option value="">-- Chọn --</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+
+            <!-- MCQ Options -->
+            <div class="form-group mb-3" id="mcqSection" style="display:none;">
+                <h5>Đáp án lựa chọn</h5>
+                <div id="optionsContainer">
+                    <div class="option-item mb-2 d-flex align-items-center">
+                        <input type="text" name="Options[0].OptionText" class="form-control w-75" placeholder="Nhập đáp án..." />
+                        <div class="form-check ms-3">
+                            <input type="checkbox" class="form-check-input" name="Options[0].IsCorrect" value="true" />
+                            <label class="form-check-label">Đúng?</label>
+                        </div>
+                        <input type="hidden" name="Options[0].IsCorrect" value="false" />
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="addOption()">+ Thêm đáp án</button>
+            </div>
+
+            <!-- Matching -->
+            <div class="form-group mb-3" id="matchingSection" style="display:none;">
+                <h5>Cặp Matching</h5>
+                <div id="matchingContainer">
+                    <div class="matching-item mb-2 d-flex gap-2">
+                        <input type="text" name="Matchings[0].LeftItem" class="form-control w-50" placeholder="Left" />
+                        <input type="text" name="Matchings[0].RightItem" class="form-control w-50" placeholder="Right" />
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="addMatching()">+ Thêm cặp</button>
+            </div>
+
+            <!-- Drag & Drop -->
+            <div class="form-group mb-3" id="dragDropSection" style="display:none;">
+                <h5>Drag & Drop</h5>
+                <div id="dragDropContainer">
+                    <div class="dragdrop-item mb-2 d-flex gap-2">
+                        <input type="text" name="DragDrops[0].DraggableText" class="form-control w-50" placeholder="Draggable text" />
+                        <input type="text" name="DragDrops[0].DropTarget" class="form-control w-50" placeholder="Drop target" />
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="addDragDrop()">+ Thêm DragDrop</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Import từ Excel ===== -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="card-title">📂 Import từ Excel</h4>
+            <div class="form-group mb-3">
+                <input asp-for="ExcelFile" type="file" class="form-control" />
+                <small class="text-muted">Hỗ trợ .xlsx, .xls. File phải có cột: Content, Type, Difficulty, Role, SkillId, OptionA, OptionB, OptionC, OptionD, CorrectAnswer, TrueFalseAnswer</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút hành động -->
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">💾 Lưu</button>
+        <a asp-action="Index" class="btn btn-secondary">⬅ Quay lại</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function addOption() {
+            let index = document.querySelectorAll("#optionsContainer .option-item").length;
+            let html = `
+                <div class="option-item mb-2 d-flex align-items-center">
+                    <input type="text" name="Options[${index}].OptionText" class="form-control w-75" placeholder="Nhập đáp án..." />
+                    <div class="form-check ms-3">
+                        <input type="checkbox" class="form-check-input" name="Options[${index}].IsCorrect" value="true" />
+                        <label class="form-check-label">Đúng?</label>
+                    </div>
+                    <input type="hidden" name="Options[${index}].IsCorrect" value="false" />
+                </div>`;
+            document.getElementById("optionsContainer").insertAdjacentHTML("beforeend", html);
+        }
+
+        function addMatching() {
+            let index = document.querySelectorAll("#matchingContainer .matching-item").length;
+            let html = `
+                <div class="matching-item mb-2 d-flex gap-2">
+                    <input type="text" name="Matchings[${index}].LeftItem" class="form-control w-50" placeholder="Left" />
+                    <input type="text" name="Matchings[${index}].RightItem" class="form-control w-50" placeholder="Right" />
+                </div>`;
+            document.getElementById("matchingContainer").insertAdjacentHTML("beforeend", html);
+        }
+
+        function addDragDrop() {
+            let index = document.querySelectorAll("#dragDropContainer .dragdrop-item").length;
+            let html = `
+                <div class="dragdrop-item mb-2 d-flex gap-2">
+                    <input type="text" name="DragDrops[${index}].DraggableText" class="form-control w-50" placeholder="Draggable text" />
+                    <input type="text" name="DragDrops[${index}].DropTarget" class="form-control w-50" placeholder="Drop target" />
+                </div>`;
+            document.getElementById("dragDropContainer").insertAdjacentHTML("beforeend", html);
+        }
+
+        document.getElementById("Type").addEventListener("change", function () {
+            let type = this.value;
+            document.getElementById("mcqSection").style.display = type === "MCQ" ? "block" : "none";
+            document.getElementById("trueFalseSection").style.display = type === "TrueFalse" ? "block" : "none";
+            document.getElementById("matchingSection").style.display = type === "Matching" ? "block" : "none";
+            document.getElementById("dragDropSection").style.display = type === "DragDrop" ? "block" : "none";
+        });
+    </script>
+}

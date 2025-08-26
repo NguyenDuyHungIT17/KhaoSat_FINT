@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - MyApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+        :root {
+            --blue-1: #3a8dde; /* Xanh trung bình */
+            --blue-2: #1e4fa3; /* Xanh dương đậm hơn */
+            --text-dark: #121417;
+        }
+
+        /* Layout tổng: header + main + footer theo cột, footer luôn dưới đáy */
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #fdfdfd;
+            color: var(--text-dark);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Header */
+        .bg-orange-gradient {
+            background: linear-gradient(90deg, var(--orange-1), var(--orange-2));
+        }
+
+        .navbar.navbar-light .navbar-brand,
+        .navbar.navbar-light .nav-link {
+            color: #222 !important;
+            font-weight: 500;
+        }
+
+            .navbar.navbar-light .nav-link:hover {
+                color: #000 !important;
+                text-decoration: underline;
+            }
+
+        .navbar {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        /* Nội dung chính chiếm khoảng trống còn lại */
+        main {
+            flex: 1 0 auto; /* quan trọng: giúp main giãn nở đúng tỉ lệ */
+        }
+
+        /* Footer luôn ở đáy, sáng + chữ đậm vừa phải */
+        footer {
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            padding: 16px 0;
+            font-size: 14px;
+            color: #495057;
+        }
+    </style>
+
+    @RenderSection("Head", required: false)
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-orange-gradient">
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index" center>FINT</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+                    <ul class="navbar-nav">
+                       
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Nội dung -->
+    <main class="container py-4">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 - MyApp | Giao diện sáng, chữ đen, tỉ lệ chuẩn</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

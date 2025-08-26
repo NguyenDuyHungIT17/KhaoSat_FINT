@@ -1,0 +1,42 @@
+﻿@model IEnumerable<KhaoSat.Models.Question>
+
+@{
+    ViewData["Title"] = "Danh sách câu hỏi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách Câu hỏi</h2>
+
+<h2>Questions</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Question</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Content</th>
+            <th>Type</th>
+            <th>Difficulty</th>
+            <th>Skill</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Content</td>
+            <td>@item.Type</td>
+            <td>@item.Difficulty</td>
+            <td>@item.Skill?.Name</td>
+            <td>@item.Role</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.QuestionId" class="btn btn-sm btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.QuestionId" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

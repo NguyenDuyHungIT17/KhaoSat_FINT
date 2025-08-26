@@ -1,0 +1,32 @@
+﻿@model KhaoSat.Models.Dtos.Department.DepartmentCreateDto
+
+@{
+    ViewData["Title"] = "Tạo mới phòng ban";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="mb-4 text-warning">➕ Tạo mới phòng ban</h2>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-warning text-dark fw-bold">
+        Thông tin phòng ban
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" method="post" class="row g-3">
+            <div class="col-md-12">
+                <label asp-for="DepartmentName" class="form-label"></label>
+                <input asp-for="DepartmentName" class="form-control" placeholder="Nhập tên phòng ban" />
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-warning text-dark fw-bold">💾 Lưu</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">⬅️ Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

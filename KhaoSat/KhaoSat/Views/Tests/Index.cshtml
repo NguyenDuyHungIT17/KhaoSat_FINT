@@ -1,0 +1,63 @@
+﻿@model IEnumerable<KhaoSat.Models.Test>
+
+@{
+    ViewData["Title"] = "Quản lý bài test";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class="mb-4">Quản lý bài test</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">
+        <i class="bi bi-plus-circle"></i> Thêm bài test mới
+    </a>
+</p>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Type)</th>
+            <th>@Html.DisplayNameFor(model => model.DurationMinutes)</th>
+            <th>@Html.DisplayNameFor(model => model.PassingScore)</th>
+            <th>Người tạo</th>
+            <th style="width:180px;">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Type</td>
+                    <td>@item.DurationMinutes phút</td>
+                    <td>@(item.PassingScore.HasValue? item.PassingScore.Value.ToString("0.##") : "-")</td>
+                    <td>
+                        @(item.CreatedByNavigation != null
+                                        ? item.CreatedByNavigation.FullName  // giả sử Employee có FullName
+                                        : "N/A")
+            </td>
+            <td>
+                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.TestId">
+                    <i class="bi bi-pencil-square"></i> Sửa
+                </a>
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.TestId">
+                    <i class="bi bi-eye"></i> Xem
+                </a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.TestId">
+                    <i class="bi bi-trash"></i> Xoá
+                </a>
+            </td>
+        </tr>
+                }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center text-muted">Chưa có bài test nào</td>
+            </tr>
+        }
+    </tbody>
+</table>

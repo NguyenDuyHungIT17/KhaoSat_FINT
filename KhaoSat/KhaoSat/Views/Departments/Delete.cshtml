@@ -1,0 +1,37 @@
+﻿@model KhaoSat.Models.Department
+
+@{
+    ViewData["Title"] = "Xóa phòng ban";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="mb-4 text-warning">🗑️ Xóa phòng ban</h2>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-warning text-dark fw-bold">
+        Thông tin phòng ban
+    </div>
+    <div class="card-body">
+        <dl class="row mb-4">
+            <dt class="col-md-3 fw-semibold">Tên phòng ban</dt>
+            <dd class="col-md-9">@Model.Name</dd>
+
+            <dt class="col-md-3 fw-semibold">Công ty</dt>
+            <dd class="col-md-9">@Model.Company?.Name</dd>
+        </dl>
+
+        <p class="text-danger fw-bold">
+            ⚠️ Hành động này không thể hoàn tác. Bạn có chắc chắn muốn xóa phòng ban này không?
+        </p>
+
+        <form asp-action="Delete" method="post" class="d-flex gap-2">
+            <input type="hidden" asp-for="DepartmentId" />
+            <button type="submit" class="btn btn-danger fw-bold">🗑️ Xóa</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">⬅️ Quay lại</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

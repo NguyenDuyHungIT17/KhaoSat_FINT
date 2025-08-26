@@ -1,0 +1,62 @@
+﻿@model KhaoSat.Models.Dtos.Employee.EmployeeEditDto
+@{
+    ViewData["Title"] = "Chỉnh sửa nhân viên";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="mb-4 text-warning">✏️ Chỉnh sửa nhân viên</h2>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-warning text-dark fw-bold">
+        Thông tin nhân viên
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post" class="row g-3">
+            <input type="hidden" asp-for="EmployeeId" />
+
+            <div class="col-md-6">
+                <label asp-for="FullName" class="form-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="DepartmentId" class="form-label"></label>
+                <select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select">
+                    <option value="">-- Chọn phòng ban --</option>
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="LevelId" class="form-label"></label>
+                <select asp-for="LevelId" asp-items="ViewBag.Levels" class="form-select">
+                    <option value="">-- Chọn cấp bậc --</option>
+                </select>
+                <span asp-validation-for="LevelId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="RoleIds" class="form-label"></label>
+                <select asp-for="RoleIds" asp-items="ViewBag.Roles" class="form-select" multiple size="5"></select>
+                <small class="text-muted">Giữ Ctrl/⌘ để chọn nhiều</small>
+                <span asp-validation-for="RoleIds" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex gap-2">
+                <button type="submit" class="btn btn-warning text-dark fw-bold">💾 Cập nhật</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">⬅️ Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

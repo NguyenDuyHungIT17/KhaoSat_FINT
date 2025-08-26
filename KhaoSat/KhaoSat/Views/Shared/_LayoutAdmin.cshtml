@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin Panel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            flex: 1;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #343a40;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+            .sidebar .nav-link {
+                color: #adb5bd;
+            }
+
+                .sidebar .nav-link.active,
+                .sidebar .nav-link:hover {
+                    background-color: #495057;
+                    color: #fff;
+                }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        footer {
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header nhỏ trên cùng -->
+    <header class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Admin Panel</a>
+            <ul class="navbar-nav ms-auto flex-row">
+                <li class="nav-item">
+                    <a class="nav-link text-danger" asp-controller="Home" asp-action="Logout">Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Sidebar + Content -->
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar d-flex flex-column p-3">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Employees" asp-action="Index">Quản lý nhân viên</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Roles" asp-action="Index">Quản lý vai trò</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Departments" asp-action="Index">Quản lý phòng ban</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Questions" asp-action="Index">Ngân hàng câu hỏi</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-controller="Tests" asp-action="Index">Các bài test</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Nội dung chính -->
+        <main class="content">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Admin Panel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

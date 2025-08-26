@@ -1,0 +1,209 @@
+﻿@using KhaoSat.Models
+@{
+    ViewData["Title"] = "User Dashboard";
+
+    // Thông tin cá nhân
+    var fullName = ViewBag.FullName as string;
+    var email = ViewBag.Email as string;
+    var roles = ViewBag.Roles as List<string>;
+    var level = ViewBag.Level as string;
+    var departmentName = ViewBag.Department as string;
+    var dob = ViewBag.DateOfBirth as DateTime?;
+
+    // Danh sách phòng ban
+    var departments = ViewBag.Departments as List<Department>;
+    int? currentDeptId = ViewBag.DepartmentId as int?;
+
+    // Bài test mới
+    var availableTests = ViewBag.AvailableTests as List<Test>;
+
+    // Lịch sử làm test
+    var testsHistory = ViewBag.Tests as List<Employeetest>;
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<style>
+    .bg-warning-orange { background-color: #FFA500 !important; color: #fff; }
+    .btn-warning-orange { background-color: #FFB347; color: #fff; border: none; }
+    .btn-warning-orange:hover { background-color: #FFA500; color: #fff; }
+    .card-header-warning-orange { background-color: #FFB347; color: #fff; }
+</style>
+
+<div class="container mt-5">
+    <h2 class="mb-4" style="color:#FF8C00;">Quản lý hồ sơ cá nhân</h2>
+    <div class="row">
+
+        <!-- Thông tin cá nhân + Bài test mới -->
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header card-header-warning-orange">Thông tin cá nhân</div>
+                <div class="card-body">
+                    <p><strong>Họ tên:</strong> @fullName</p>
+                    <p><strong>Email:</strong> @email</p>
+                    <p><strong>Ngày sinh:</strong> @(dob?.ToString("dd/MM/yyyy") ?? "Chưa có")</p>
+                    <p><strong>Roles:</strong> @(roles != null ? string.Join(", ", roles) : "")</p>
+                    <p><strong>Level:</strong> @level</p>
+                    <p><strong>Phòng ban:</strong> @departmentName</p>
+
+                    <a href="#" class="btn btn-warning-orange btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#updateProfileModal">Cập nhật thông tin</a>
+                    <a href="#" class="btn btn-outline-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Đổi mật khẩu</a>
+                </div>
+            </div>
+
+            <!-- Bài test mới -->
+            @if (availableTests != null && availableTests.Count > 0)
+            {
+                <div class="alert alert-warning shadow-sm rounded-3">
+                    <h5 class="mb-2">📢 Bạn có bài test mới!</h5>
+                    @foreach (var test in availableTests)
+                    {
+                        <div class="mb-2">
+                            <p><strong>@test.Name</strong> (Loại: @test.Type, Thời gian: @test.DurationMinutes phút, Điểm đạt: @test.PassingScore)</p>
+                            <a asp-action="StartTest" asp-controller="Employeetests" asp-route-testId="@test.TestId" class="btn btn-warning-orange btn-sm mb-2">Bắt đầu làm test</a>
+                            <hr />
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- Lịch sử làm test -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header card-header-warning-orange d-flex justify-content-between align-items-center">
+                    <span>Lịch sử bài test</span>
+                    <a href="#" class="btn btn-warning-orange btn-sm">Xem tất cả</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle">
+                            <thead class="table-warning">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên bài test</th>
+                                    <th>Loại</th>
+                                    <th>Ngày làm</th>
+                                    <th>Điểm qua bài</th>
+                                    <th>Điểm đạt được</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (testsHistory != null && testsHistory.Count > 0)
+                                {
+                                    int i = 1;
+                                    foreach (var et in testsHistory)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@et.Test?.Name</td>
+                                            <td>@et.Test?.Type</td>
+                                            <td>@(et.EndTime?.ToString("dd/MM/yyyy") ?? "-")</td>
+                                            <td>@et.Test?.PassingScore</td>
+                                            <td>@(et.TotalScore?.ToString() ?? "-")</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">Chưa có bài test nào.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+
+<!-- Modal cập nhật thông tin cá nhân -->
+<div class="modal fade" id="updateProfileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="UpdateProfile" asp-controller="Home" method="post">
+                <div class="modal-header bg-warning-orange">
+                    <h5 class="modal-title">Cập nhật thông tin cá nhân</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Họ tên</label>
+                        <input type="text" class="form-control" name="fullName" value="@fullName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" value="@email" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ngày sinh</label>
+                        <input type="date" class="form-control" name="dateOfBirth" value="@(dob?.ToString("yyyy-MM-dd") ?? "")" />
+                    </div>
+                    <div class="mb-3">
+    <label class="form-label">Phòng ban</label>
+                        <select name="departmentId" class="form-select">
+                            <option value="">-- Chọn phòng ban --</option>
+                            @foreach (var dept in departments)
+                            {
+                                if (dept.DepartmentId == currentDeptId)
+                                {
+                                    <option value="@dept.DepartmentId" selected>@dept.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@dept.DepartmentId">@dept.Name</option>
+                                }
+                            }
+                        </select>
+
+</div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning-orange">Lưu thay đổi</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal đổi mật khẩu -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="ChangePassword" asp-controller="Home" method="post">
+                <div class="modal-header bg-warning-orange">
+                    <h5 class="modal-title">Đổi mật khẩu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu hiện tại</label>
+                        <input type="password" class="form-control" name="CurrentPassword" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu mới</label>
+                        <input type="password" class="form-control" name="NewPassword" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Xác nhận mật khẩu mới</label>
+                        <input type="password" class="form-control" name="ConfirmPassword" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning-orange">Lưu mật khẩu</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

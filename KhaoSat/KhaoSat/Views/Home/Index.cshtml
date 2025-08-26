@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Chào mừng đến hệ thống khảo sát Fint</h1>
+    <p>Ứng dụng này giúp quản lý công ty, phòng ban, nhân viên và khảo sát nội bộ.</p>
+
+    <hr />
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <a class="btn btn-primary w-100" asp-controller="Companies" asp-action="Index">
+                Quản lý Công ty
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-success w-100" asp-controller="Departments" asp-action="Index">
+                Quản lý Phòng ban
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-info w-100" asp-controller="Employees" asp-action="Index">
+                Quản lý Nhân viên
+            </a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <a class="btn btn-warning w-100" asp-controller="Surveys" asp-action="Index">
+                Quản lý Khảo sát
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="btn btn-dark w-100" asp-controller="SystemSettings" asp-action="Index">
+                Cấu hình hệ thống
+            </a>
+        </div>
+    </div>
+</div>

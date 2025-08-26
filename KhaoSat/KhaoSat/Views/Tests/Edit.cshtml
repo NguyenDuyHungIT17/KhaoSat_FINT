@@ -1,0 +1,89 @@
+﻿@model KhaoSat.Models.ViewModel.TestEditViewModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa bài test";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var questions = (IEnumerable<dynamic>)ViewBag.Questions;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header" style="background-color:#ff914d; color:white; font-weight:bold;">
+            <h4 class="mb-0">Chỉnh sửa bài test</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="TestId" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="TestName" class="form-label fw-bold"></label>
+                    <input asp-for="TestName" class="form-control" placeholder="Nhập tên bài test..." />
+                    <span asp-validation-for="TestName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Type" class="form-label fw-bold">Loại bài test</label>
+                    <select asp-for="Type" class="form-select" asp-items="ViewBag.Roles">
+                        <option value="">-- Chọn loại bài test --</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DurationMinutes" class="form-label fw-bold">Thời gian (phút)</label>
+                    <input asp-for="DurationMinutes" class="form-control" type="number" placeholder="VD: 45" />
+                    <span asp-validation-for="DurationMinutes" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PassingScore" class="form-label fw-bold">Điểm đạt</label>
+                    <input asp-for="PassingScore" class="form-control" type="number" placeholder="VD: 60" />
+                    <span asp-validation-for="PassingScore" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CreatedBy" class="form-label fw-bold">Người tạo (Admin)</label>
+                    <select asp-for="CreatedBy" class="form-select" asp-items="ViewBag.CreatedBy">
+                        <option value="">-- Chọn Admin --</option>
+                    </select>
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                </div>
+
+                <!-- Chọn câu hỏi -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Câu hỏi</label>
+                    <div class="border rounded p-3" style="max-height:300px; overflow-y:auto; background-color:#fffaf5;">
+                        @foreach (var q in questions)
+                        {
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox"
+                                       name="SelectedQuestions[]" value="@q.QuestionId"
+                                       id="q_@q.QuestionId"
+                                       @(Model.SelectedQuestions != null && Model.SelectedQuestions.Contains(q.QuestionId) ? "checked" : "") />
+                                <label class="form-check-label" for="q_@q.QuestionId">@q.Content</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn" style="background-color:#ff914d; color:white; font-weight:bold;">
+                        <i class="bi bi-save"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

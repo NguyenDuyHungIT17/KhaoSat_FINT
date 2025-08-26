@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Tạo bài test tự động";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header" style="background-color:#ff914d; color:white; font-weight:bold;">
+            <h4 class="mb-0">Tạo bài test tự động</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="AutoCreate" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tên bài test</label>
+                    <input name="testName" class="form-control" placeholder="Nhập tên bài test..." required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Role</label>
+                    <select name="role" class="form-select" required>
+                        <option value="">-- Chọn Role --</option>
+                        @foreach (var r in ViewBag.Roles)
+                        {
+                            <option value="@r.Value">@r.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Difficulty</label>
+                    <input name="difficulty" class="form-control" placeholder="Intern / Junior / Senior..." required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Số câu hỏi</label>
+                    <input name="soCauHoi" type="number" class="form-control" min="1" value="5" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Thời gian (phút)</label>
+                    <input name="durationMinutes" type="number" class="form-control" value="60" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Điểm đạt</label>
+                    <input name="passingScore" type="number" class="form-control" value="70" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Người tạo</label>
+                    <select name="createdBy" class="form-select">
+                        @foreach (var e in ViewBag.CreatedBy)
+                        {
+                            <option value="@e.Value">@e.Text</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn" style="background-color:#ff914d; color:white; font-weight:bold;">
+                        <i class="bi bi-save"></i> Tạo bài test
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

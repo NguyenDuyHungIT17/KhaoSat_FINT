@@ -1,0 +1,64 @@
+﻿@model IEnumerable<KhaoSat.Models.Department>
+
+@{
+    ViewData["Title"] = "Departments";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-dark mb-4">QUẢN LÝ PHÒNG BAN</h2>
+
+    <div class="text-end mb-3">
+        <a asp-action="Create" class="btn btn-sm btn-warning text-dark fw-bold">
+            ➕ Tạo mới phòng ban
+        </a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var dept in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-light text-dark fw-bold d-flex justify-content-between">
+                        <span><span>Phòng: </span>@dept.Name</span>
+                        <div class="btn-group btn-group-sm">
+                            <a asp-action="Edit" asp-route-id="@dept.DepartmentId" class="btn btn-outline-secondary">Sửa</a>
+                            <a asp-action="Delete" asp-route-id="@dept.DepartmentId" class="btn btn-outline-danger">Xóa</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p><b>Công ty:</b> @dept.Company?.Name</p>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Nhân viên</h6>
+                            <a asp-controller="Employees" asp-action="Create" asp-route-departmentId="@dept.DepartmentId"
+                               class="btn btn-sm btn-warning text-dark fw-bold">➕ Thêm nhân viên</a>
+                        </div>
+
+                        @if (dept.Employees != null && dept.Employees.Any())
+                        {
+                            <ul class="list-group list-group-flush">
+                                @foreach (var emp in dept.Employees)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>@emp.FullName (@emp.Email)</span>
+                                        <span>@emp.Level</span>
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-controller="Employees" asp-action="Edit" asp-route-id="@emp.EmployeeId" class="btn btn-outline-primary">Sửa</a>
+                                            <a asp-controller="Employees" asp-action="Delete" asp-route-id="@emp.EmployeeId" class="btn btn-outline-danger">Xóa</a>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p class="text-muted mb-0">No employees in this department.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+ 
