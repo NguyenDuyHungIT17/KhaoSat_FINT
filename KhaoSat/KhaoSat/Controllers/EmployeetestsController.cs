@@ -53,64 +53,141 @@ namespace KhaoSat.Controllers
                 .ToListAsync();
 
             ViewBag.EmployeeTestId = empTest.EmployeeTestId;
+            var test = await _context.Tests
+            .Where(t => t.TestId == empTest.TestId)
+            .FirstOrDefaultAsync();
+
+            ViewBag.DurationMinutes = test?.DurationMinutes ?? 0;
+            ViewBag.RemainingSeconds = 0;
+            if (empTest.StartTime.HasValue && test?.DurationMinutes != null)
+            {
+                var endTime = empTest.StartTime.Value.AddMinutes(test.DurationMinutes.Value);
+                var remain = (endTime - DateTime.Now).TotalSeconds;
+                if (remain < 0) remain = 0;
+                ViewBag.RemainingSeconds = (int)remain;
+            }
             return View(questions);
         }
 
         // POST: /EmployeeTests/SubmitTest
+        // POST: /Employeetests/SubmitTest
         [HttpPost]
-        public async Task<IActionResult> SubmitTest(int employeeTestId, Dictionary<int, string> answers)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SubmitTest(int EmployeeTestId)
         {
-            foreach (var kv in answers)
-            {
-                int questionId = kv.Key;
-                string answer = kv.Value;
-
-                var empAnswer = new Employeeanswer
-                {
-                    EmployeeTestId = employeeTestId,
-                    QuestionId = questionId,
-                    Answer = answer
-                };
-                _context.Employeeanswers.Add(empAnswer);
-            }
-            await _context.SaveChangesAsync();
-
-            // Tính tổng điểm đơn giản: số câu đúng chia tổng câu * 10
             var empTest = await _context.Employeetests
                 .Include(et => et.Test)
                     .ThenInclude(t => t.Testquestions)
                         .ThenInclude(tq => tq.Question)
                             .ThenInclude(q => q.QuestionOptions)
-                .FirstOrDefaultAsync(et => et.EmployeeTestId == employeeTestId);
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionTrueFalse)
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionMatchings)
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionDragDrops)
+                .FirstOrDefaultAsync(et => et.EmployeeTestId == EmployeeTestId);
 
-            int total = 0;
-            int correct = 0;
+            if (empTest == null) return NotFound();
+
+            // lấy tất cả câu trả lời
+            var savedAnswers = await _context.Employeeanswers
+                .Where(a => a.EmployeeTestId == EmployeeTestId)
+                .ToListAsync();
+
+            double rawScore = 0;
+            int totalQuestions = empTest.Test.Testquestions.Count;
+
             foreach (var tq in empTest.Test.Testquestions)
             {
                 var q = tq.Question;
+                double qScore = 0.0;
+
+                var userAns = savedAnswers.FirstOrDefault(a => a.QuestionId == q.QuestionId);
+                if (userAns == null) continue;
+
                 if (q.QuestionOptions.Any())
                 {
-                    var userAns = answers[q.QuestionId];
-                    var correctOpt = q.QuestionOptions.FirstOrDefault(o => o.IsCorrect)?.OptionId.ToString();
-                    if (userAns == correctOpt) correct++;
+                    var correctSet = q.QuestionOptions.Where(o => o.IsCorrect)
+                                                      .Select(o => o.OptionId.ToString())
+                                                      .ToHashSet();
+                    var selectedSet = (userAns.Answer ?? "")
+                                      .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                      .Select(s => s.Trim()).ToHashSet();
+                    if (correctSet.SetEquals(selectedSet)) qScore = 1.0;
                 }
                 else if (q.QuestionTrueFalse != null)
                 {
-                    var userAns = answers[q.QuestionId];
-                    if (bool.TryParse(userAns, out bool ua) && ua == q.QuestionTrueFalse.CorrectAnswer)
-                        correct++;
+                    if (bool.TryParse(userAns.Answer, out var userVal))
+                    {
+                        if (userVal == q.QuestionTrueFalse.CorrectAnswer) qScore = 1.0;
+                    }
                 }
-                // Matching & DragDrop tính sau hoặc bỏ qua demo
+                else if (q.QuestionMatchings.Any())
+                {
+                    var pairs = userAns.Answer?.Split('|', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+                    int correct = 0, n = q.QuestionMatchings.Count();
+                    var matchings = q.QuestionMatchings.ToList();
+                    for (int i = 0; i < n && i < pairs.Length; i++)
+                    {
+                        var expected = $"{matchings[i].LeftItem}->{matchings[i].RightItem}";
+                        if (pairs[i].Contains(expected)) correct++;
+                    }
+                    if (n > 0) qScore = (double)correct / n;
+                }
+                else if (q.QuestionDragDrops.Any())
+                {
+                    var items = q.QuestionDragDrops.ToList();
+                    int n = items.Count;
+                    int correct = 0;
+                    foreach (var it in items)
+                    {
+                        if (userAns.Answer != null && userAns.Answer.Contains($"{it.DraggableText}->{it.DropTarget}"))
+                            correct++;
+                    }
+                    if (n > 0) qScore = (double)correct / n;
+                }
+                else
+                {
+                    qScore = 0.0; // Essay chấm sau
+                }
+
+                userAns.Score = qScore;
+                rawScore += qScore;
             }
 
-            total = (int)((double)correct / empTest.Test.Testquestions.Count * 10);
-            empTest.TotalScore = total;
+            double total10 = totalQuestions > 0
+                ? Math.Round(rawScore / totalQuestions * 10.0, 2)
+                : 0.0;
+
+            empTest.TotalScore = total10;
             empTest.EndTime = DateTime.Now;
+            if (empTest.StartTime.HasValue && empTest.Test.DurationMinutes.HasValue)
+            {
+                var deadline = empTest.StartTime.Value.AddMinutes(empTest.Test.DurationMinutes.Value);
+                empTest.Status = DateTime.Now > deadline ? "Timeout" : "Completed";
+            }
+            else empTest.Status = "Completed";
+
             await _context.SaveChangesAsync();
 
+            // 🔹 Nếu là AJAX request → trả JSON
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            {
+                return Json(new { success = true, score = total10 });
+            }
+
+            // 🔹 Nếu submit form bình thường → redirect
             return RedirectToAction("UserIndex", "Home");
         }
-    
+
+
 
         // GET: Employeetests
         public async Task<IActionResult> Index()
@@ -259,5 +336,136 @@ namespace KhaoSat.Controllers
         {
             return _context.Employeetests.Any(e => e.EmployeeTestId == id);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveAnswer(int employeeTestId, int questionId, string answer)
+        {
+            var empTest = await _context.Employeetests
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionOptions)
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionTrueFalse)
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionMatchings)
+                .Include(et => et.Test)
+                    .ThenInclude(t => t.Testquestions)
+                        .ThenInclude(tq => tq.Question)
+                            .ThenInclude(q => q.QuestionDragDrops)
+                .FirstOrDefaultAsync(et => et.EmployeeTestId == employeeTestId);
+
+            if (empTest == null) return NotFound();
+
+            // 🔹 Lấy hoặc tạo mới câu trả lời
+            var existing = await _context.Employeeanswers
+                .FirstOrDefaultAsync(a => a.EmployeeTestId == employeeTestId && a.QuestionId == questionId);
+
+            if (existing == null)
+            {
+                existing = new Employeeanswer
+                {
+                    EmployeeTestId = employeeTestId,
+                    QuestionId = questionId
+                };
+                _context.Employeeanswers.Add(existing);
+            }
+
+            existing.Answer = answer;
+
+            // 🔹 Tính điểm cho câu hiện tại
+            var tq = empTest.Test.Testquestions.FirstOrDefault(t => t.QuestionId == questionId);
+            double qScore = 0.0;
+
+            if (tq != null)
+            {
+                var q = tq.Question;
+
+                // --- MCQ ---
+                if (q.QuestionOptions.Any())
+                {
+                    var correctSet = q.QuestionOptions.Where(o => o.IsCorrect)
+                                                      .Select(o => o.OptionId.ToString())
+                                                      .ToHashSet();
+
+                    var selectedSet = (answer ?? "")
+                                      .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                      .Select(s => s.Trim())
+                                      .ToHashSet();
+
+                    if (correctSet.SetEquals(selectedSet)) qScore = 1.0;
+                }
+                // --- True/False ---
+                else if (q.QuestionTrueFalse != null)
+                {
+                    if (bool.TryParse(answer, out var userVal))
+                    {
+                        if (userVal == q.QuestionTrueFalse.CorrectAnswer) qScore = 1.0;
+                    }
+                }
+                // --- Matching ---
+                else if (q.QuestionMatchings.Any())
+                {
+                    var pairs = answer?.Split('|', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+                    int correct = 0, n = q.QuestionMatchings.Count();
+
+                    var matchings = q.QuestionMatchings.ToList();
+                    for (int i = 0; i < n && i < pairs.Length; i++)
+                    {
+                        var expected = $"{matchings[i].LeftItem}->{matchings[i].RightItem}";
+                        if (pairs[i].Contains(expected)) correct++;
+                    }
+
+                    if (n > 0) qScore = (double)correct / n;
+                }
+                // --- DragDrop ---
+                else if (q.QuestionDragDrops.Any())
+                {
+                    var items = q.QuestionDragDrops.ToList();
+                    int n = items.Count;
+                    int correct = 0;
+
+                    foreach (var it in items)
+                    {
+                        if (answer != null && answer.Contains($"{it.DraggableText}->{it.DropTarget}"))
+                            correct++;
+                    }
+
+                    if (n > 0) qScore = (double)correct / n;
+                }
+                // --- Essay ---
+                else
+                {
+                    qScore = 0.0; // chấm tay sau
+                }
+            }
+
+            existing.Score = qScore;
+
+            // 🔹 Cập nhật luôn tổng điểm của toàn bài
+            var allAnswers = await _context.Employeeanswers
+                 .Where(a => a.EmployeeTestId == employeeTestId)
+                 .ToListAsync();
+
+            int totalQuestions = empTest.Test.Testquestions.Count;
+
+            // Fix lỗi nullable
+            double rawScore = allAnswers.Sum(a => a.Score ?? 0);
+
+            double total10 = totalQuestions > 0
+                ? Math.Round(rawScore / totalQuestions * 10.0, 2)
+                : 0.0;
+
+            empTest.TotalScore = total10;
+
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, qScore, total10 });
+        }
+
     }
 }

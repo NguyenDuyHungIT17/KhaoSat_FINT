@@ -293,3 +293,4 @@ C:\Users\HUNG NGUYEN\OneDrive\Desktop\KhaoSat\KhaoSat\KhaoSat\bin\Debug\net8.0\S
 C:\Users\HUNG NGUYEN\OneDrive\Desktop\KhaoSat\KhaoSat\KhaoSat\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
 C:\Users\HUNG NGUYEN\OneDrive\Desktop\KhaoSat\KhaoSat\KhaoSat\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\HUNG NGUYEN\OneDrive\Desktop\KhaoSat\KhaoSat\KhaoSat\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\HUNG NGUYEN\OneDrive\Desktop\KhaoSat\KhaoSat\KhaoSat\obj\Debug\net8.0\KhaoSat.sourcelink.json

@@ -22,98 +22,156 @@
             background-color: #FFA500;
             color: #fff;
         }
+
+    .drag-item {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px dashed #999;
+        border-radius: 6px;
+        margin: 4px;
+        cursor: grab;
+    }
+
+    .drop-box {
+        min-height: 42px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 6px;
+        margin: 4px 0;
+    }
+
+        .drop-box.hover {
+            outline: 2px dashed #666;
+        }
 </style>
 
 <h2 class="mb-4" style="color:#FF8C00;">Bài test</h2>
+<p>Thời lượng (phút): @ViewBag.DurationMinutes</p>
 
-<form asp-action="SubmitTest" asp-controller="Employeetests" method="post">
-    <input type="hidden" name="employeeTestId" value="@employeeTestId" />
+<div class="alert alert-warning text-center fw-bold fs-5">
+    Thời gian còn lại: <span id="timer" class="text-danger fw-bold"></span>
+</div>
+
+<form asp-action="SubmitTest" asp-controller="Employeetests" method="post" id="testForm">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="EmployeeTestId" value="@employeeTestId" />
 
     @for (int i = 0; i < Model.Count; i++)
     {
         var q = Model[i];
-        <div class="card mb-3">
+        var hasOptions = q.QuestionOptions != null && q.QuestionOptions.Any();
+        var hasTF = q.QuestionTrueFalse != null;
+        var hasMatching = q.QuestionMatchings != null && q.QuestionMatchings.Any();
+        var hasDrag = q.QuestionDragDrops != null && q.QuestionDragDrops.Any();
+        bool multipleAnswers = hasOptions && q.QuestionOptions.Count(o => o.IsCorrect) > 1;
+
+        <div class="card mb-3 question-block" data-qid="@q.QuestionId">
             <div class="card-header bg-warning-orange">
                 Câu @(i + 1): @q.Content
             </div>
             <div class="card-body">
-
                 @* Multiple Choice *@
-                @if (q.QuestionOptions != null && q.QuestionOptions.Any())
+                @if (hasOptions)
                 {
-                    bool multipleAnswers = q.QuestionOptions.Count(o => o.IsCorrect) > 1;
-                    foreach (var opt in q.QuestionOptions)
+                    if (!multipleAnswers)
                     {
-                        <div class="form-check">
-                            <input class="form-check-input" type="@(multipleAnswers ? "checkbox" : "radio")"
-                                   name="answers[@q.QuestionId]@(multipleAnswers ? "[]" : "")"
-                                   value="@opt.OptionId" />
-                            <label class="form-check-label">@opt.OptionText</label>
-                        </div>
+                        foreach (var opt in q.QuestionOptions)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio"
+                                       name="choice[@q.QuestionId]"
+                                       value="@opt.OptionId"
+                                       onchange="autoSave(@q.QuestionId, '@opt.OptionId')" />
+                                <label class="form-check-label">@opt.OptionText</label>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        foreach (var opt in q.QuestionOptions)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                       name="multi[@q.QuestionId]"
+                                       value="@opt.OptionId"
+                                       onchange="collectAndSaveMulti(@q.QuestionId)" />
+                                <label class="form-check-label">@opt.OptionText</label>
+                            </div>
+                        }
                     }
                 }
-                @* True / False *@
-                else if (q.QuestionTrueFalse != null)
+                @* True/False *@
+                else if (hasTF)
                 {
-                    <text>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answers[@q.QuestionId]" value="true" />
-                            <label class="form-check-label">Đúng</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answers[@q.QuestionId]" value="false" />
-                            <label class="form-check-label">Sai</label>
-                        </div>
-                    </text>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tf[@q.QuestionId]" value="true"
+                               onchange="autoSave(@q.QuestionId, 'true')" />
+                        <label class="form-check-label">Đúng</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tf[@q.QuestionId]" value="false"
+                               onchange="autoSave(@q.QuestionId, 'false')" />
+                        <label class="form-check-label">Sai</label>
+                    </div>
                 }
                 @* Matching *@
-                else if (q.QuestionMatchings != null && q.QuestionMatchings.Any())
+                else if (hasMatching)
                 {
-                    <h6>Matching</h6>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Left Item</th>
-                                <th>Right Item</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int j = 0; j < q.QuestionMatchings.Count; j++)
-                            {
-                                var m = q.QuestionMatchings.ElementAt(j);
-                                <tr>
-                                    <td>@m.LeftItem</td>
-                                    <td>
-                                        <input type="text" class="form-control"
-                                               name="answers[@q.QuestionId][@j]"
-                                               placeholder="Nhập matching" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    var lefts = q.QuestionMatchings.Select(m => m.LeftItem).ToList();
+                    var rights = q.QuestionMatchings.Select(m => m.RightItem).ToList();
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                @for (int j = 0; j < lefts.Count; j++)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>@lefts[j]</span>
+                                        <select class="form-select w-50"
+                                                onchange="autoSave(@q.QuestionId, '@lefts[j]->' + this.value)">
+                                            <option value="">-- chọn --</option>
+                                            @foreach (var r in rights)
+                                            {
+                                                <option value="@r">@r</option>
+                                            }
+                                        </select>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
                 }
                 @* Drag & Drop *@
-                else if (q.QuestionDragDrops != null && q.QuestionDragDrops.Any())
+                else if (hasDrag)
                 {
-                    <h6>Drag & Drop</h6>
-                    @for (int j = 0; j < q.QuestionDragDrops.Count; j++)
-                    {
-                        var d = q.QuestionDragDrops.ElementAt(j);
-                        <div class="mb-2 d-flex gap-2 align-items-center">
-                            <span>@d.DraggableText</span>
-                            <input type="text" class="form-control"
-                                   name="answers[@q.QuestionId][@j]"
-                                   placeholder="Drop vào" />
+                    var items = q.QuestionDragDrops.ToList();
+                    <div class="row">
+                        <div class="col-md-6">
+                            @for (int j = 0; j < items.Count; j++)
+                            {
+                                <span class="drag-item" draggable="true"
+                                      data-qid="@q.QuestionId"
+                                      data-src="@j">@items[j].DraggableText</span>
+                            }
                         </div>
-                    }
+                        <div class="col-md-6">
+                            @for (int j = 0; j < items.Count; j++)
+                            {
+                                <div class="drop-box" data-qid="@q.QuestionId" data-idx="@j" data-target="@items[j].DropTarget">
+                                    <div class="small text-muted mb-1">Đích: @items[j].DropTarget</div>
+                                    <div class="drop-content"></div>
+                                </div>
+                                <input type="hidden" name="drag[@q.QuestionId][@j]" value="" />
+                            }
+                        </div>
+                    </div>
                 }
-                @* Essay / Text *@
+                @* Essay *@
                 else
                 {
-                    <input type="text" class="form-control" name="answers[@q.QuestionId]" placeholder="Nhập câu trả lời" />
+                    <textarea class="form-control" rows="3"
+                      placeholder="Nhập câu trả lời..."
+                      onblur="autoSave(@q.QuestionId, this.value)"></textarea>
                 }
-
             </div>
         </div>
     }
@@ -121,4 +179,85 @@
     <button type="submit" class="btn btn-warning-orange">Nộp bài</button>
 </form>
 
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // 🔹 Auto save ajax
+    function autoSave(qid, value) {
+        $.ajax({
+            url: '@Url.Action("SaveAnswer", "Employeetests")',
+            type: 'POST',
+            data: {
+                __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                employeeTestId: '@employeeTestId',
+                questionId: qid,
+                answer: value
+            }
+        });
+    }
+
+    // 🔹 Multi choice
+    function collectAndSaveMulti(qid) {
+        let vals = $("input[name='multi[" + qid + "]']:checked")
+                    .map(function () { return $(this).val(); }).get().join(",");
+        autoSave(qid, vals);
+    }
+
+    // 🔹 Drag & Drop
+    document.querySelectorAll('.drag-item').forEach(el => {
+        el.addEventListener('dragstart', ev => {
+            ev.dataTransfer.setData('text/plain', JSON.stringify({
+                qid: el.dataset.qid,
+                text: el.textContent.trim()
+            }));
+        });
+    });
+    document.querySelectorAll('.drop-box').forEach(box => {
+        box.addEventListener('dragover', ev => { ev.preventDefault(); box.classList.add('hover'); });
+        box.addEventListener('dragleave', () => box.classList.remove('hover'));
+        box.addEventListener('drop', ev => {
+            ev.preventDefault();
+            box.classList.remove('hover');
+            const data = JSON.parse(ev.dataTransfer.getData('text/plain'));
+            const qid = box.dataset.qid;
+            const target = box.dataset.target;
+
+            box.querySelector('.drop-content').textContent = data.text;
+            autoSave(qid, data.text + "->" + target);
+        });
+    });
+
+    // ------------------ Countdown ------------------
+    let remainingSeconds = @ViewBag.RemainingSeconds;
+    function updateTimer() {
+        let m = Math.floor(remainingSeconds / 60);
+        let s = remainingSeconds % 60;
+        document.getElementById("timer").textContent =
+            m.toString().padStart(2, '0') + ":" + s.toString().padStart(2, '0');
+
+        if (remainingSeconds <= 0) {
+            clearInterval(timerInterval);
+            alert("⏰ Hết giờ! Hệ thống sẽ tự động nộp bài.");
+
+            // disable toàn bộ input
+            document.querySelectorAll("input, textarea, select, button").forEach(el => el.disabled = true);
+
+            // 🔹 Gọi nộp bài qua AJAX
+            $.post('@Url.Action("SubmitTest", "Employeetests")',
+                {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    EmployeeTestId: '@employeeTestId'
+                },
+                function (res) {
+                    if (res.success) {
+                        alert("Bài thi đã được nộp. Điểm: " + res.score);
+                        window.location.href = '@Url.Action("UserIndex", "Home")';
+                    } else {
+                        alert("Nộp bài thất bại!");
+                    }
+                });
+        }
+        remainingSeconds--;
+    }
+    let timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+</script>
