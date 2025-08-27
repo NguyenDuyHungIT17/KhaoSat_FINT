@@ -1,0 +1,42 @@
+﻿@model KhaoSat.Models.Employeeanswer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Employeeanswer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmployeeTest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmployeeTest.EmployeeTestId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Question.QuestionId)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>

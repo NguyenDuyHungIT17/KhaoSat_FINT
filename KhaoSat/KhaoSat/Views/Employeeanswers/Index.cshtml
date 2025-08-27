@@ -1,0 +1,35 @@
+﻿@model IEnumerable<KhaoSat.Models.Employeeanswer>
+@{
+    ViewData["Title"] = "Danh sách câu hỏi tự luận chưa chấm";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nhân viên</th>
+            <th>Bài test</th>
+            <th>Câu hỏi</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EmployeeTest.Employee.FullName</td>
+                <td>@item.EmployeeTest.Test.Name</td>
+                <td>@item.Question.Content</td>
+                <td>
+                    <a class="btn btn-primary"
+                       asp-action="Grade"
+                       asp-route-employeeTestId="@item.EmployeeTestId"
+                       asp-route-questionId="@item.QuestionId">
+                        Chấm điểm
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

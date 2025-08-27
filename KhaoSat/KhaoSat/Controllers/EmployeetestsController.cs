@@ -155,7 +155,7 @@ namespace KhaoSat.Controllers
                 }
                 else
                 {
-                    qScore = 0.0; // Essay chấm sau
+                    qScore = -1; // Essay chấm sau
                 }
 
                 userAns.Score = qScore;
@@ -440,7 +440,7 @@ namespace KhaoSat.Controllers
                 // --- Essay ---
                 else
                 {
-                    qScore = 0.0; // chấm tay sau
+                    qScore = -1; // chấm tay sau
                 }
             }
 

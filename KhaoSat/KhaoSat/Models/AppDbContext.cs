@@ -13,6 +13,10 @@ public partial class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
+        
+            // Tăng timeout lên 60 giây
+            this.Database.SetCommandTimeout(120);
+        
     }
 
     public virtual DbSet<Auditlog> Auditlogs { get; set; }
