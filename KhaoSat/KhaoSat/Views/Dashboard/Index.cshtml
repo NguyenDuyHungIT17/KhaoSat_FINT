@@ -1,0 +1,123 @@
+﻿@model IEnumerable<KhaoSat.Models.ViewModel.SkillDashboardViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Dashboard - Tổng quan hệ thống</h2>
+
+    <!-- Tổng quan -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm border-primary text-center p-3">
+                <h5>Nhân viên</h5>
+                <h2>@ViewBag.TotalEmployees</h2>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm border-success text-center p-3">
+                <h5>Phòng ban</h5>
+                <h2>@ViewBag.TotalDepartments</h2>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm border-warning text-center p-3">
+                <h5>Ngân hàng câu hỏi</h5>
+                <h2>@ViewBag.TotalQuestions</h2>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card shadow-sm border-danger text-center p-3">
+                <h5>Bài test</h5>
+                <h2>@ViewBag.TotalTests</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thống kê Role + Level -->
+    <h4 class="mt-5 mb-3">Thống kê nhân viên theo Role và Level</h4>
+    <div class="row">
+        @if (ViewBag.RoleLevelSummary != null)
+        {
+            foreach (var role in ViewBag.RoleLevelSummary)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h6 class="mb-0">@role.Key</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                @foreach (var level in role.Value)
+                                {
+                                    <li>@level.Key : @level.Value</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">Không có dữ liệu thống kê Role/Level.</p>
+        }
+    </div>
+
+    <!-- Skills + Employees -->
+    <h4 class="mt-5 mb-3">Danh sách Skills và nhân viên</h4>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var skill in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@skill.SkillName</h5>
+                            @if (skill.EmployeeNames != null && skill.EmployeeNames.Count > 0)
+                            {
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var emp in skill.EmployeeNames)
+                                    {
+                                        <li class="list-group-item">@emp</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p class="text-muted"><em>Chưa có nhân viên nào có skill này.</em></p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">Không có dữ liệu kỹ năng.</p>
+        }
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 12px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+    .card-header {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .card-body li {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+</style>

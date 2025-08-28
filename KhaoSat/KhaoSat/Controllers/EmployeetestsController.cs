@@ -17,12 +17,72 @@ namespace KhaoSat.Controllers
         {
             _context = context;
         }
+
+        #region Helper
+        private async Task AddEmployeeSkillIfNotExists(int employeeId, int? skillId)
+        {
+            if (!skillId.HasValue) return;
+
+            bool exists = await _context.Employeeskills
+                .AnyAsync(es => es.EmployeeId == employeeId && es.SkillId == skillId.Value);
+            if (!exists)
+            {
+                _context.Employeeskills.Add(new Employeeskill
+                {
+                    EmployeeId = employeeId,
+                    SkillId = skillId.Value,
+                    CreatedAt = DateTime.Now
+                });
+            }
+        }
+
+        private double CalculateQuestionScore(Question q, string? answer)
+        {
+            if (q.QuestionOptions.Any())
+            {
+                var correctSet = q.QuestionOptions.Where(o => o.IsCorrect)
+                                                  .Select(o => o.OptionId.ToString())
+                                                  .ToHashSet();
+                var selectedSet = (answer ?? "")
+                                  .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                  .Select(s => s.Trim())
+                                  .ToHashSet();
+                return correctSet.SetEquals(selectedSet) ? 1.0 : 0.0;
+            }
+            else if (q.QuestionTrueFalse != null)
+            {
+                if (bool.TryParse(answer, out var val))
+                    return val == q.QuestionTrueFalse.CorrectAnswer ? 1.0 : 0.0;
+            }
+            else if (q.QuestionMatchings.Any())
+            {
+                var pairs = answer?.Split('|', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+                var matchings = q.QuestionMatchings.ToList();
+                int correct = 0;
+                for (int i = 0; i < matchings.Count && i < pairs.Length; i++)
+                {
+                    if (pairs[i].Contains($"{matchings[i].LeftItem}->{matchings[i].RightItem}"))
+                        correct++;
+                }
+                return matchings.Count > 0 ? (double)correct / matchings.Count : 0.0;
+            }
+            else if (q.QuestionDragDrops.Any())
+            {
+                var items = q.QuestionDragDrops.ToList();
+                int correct = items.Count(it => answer != null && answer.Contains($"{it.DraggableText}->{it.DropTarget}"));
+                return items.Count > 0 ? (double)correct / items.Count : 0.0;
+            }
+
+            return -1; // Essay
+        }
+        #endregion
+
+        #region StartTest
         public async Task<IActionResult> StartTest(int testId)
         {
             var empId = HttpContext.Session.GetInt32("EmployeeId");
             if (empId == null) return RedirectToAction("Login", "Home");
 
-            // Tạo record Employeetest nếu chưa có
             var empTest = await _context.Employeetests
                 .FirstOrDefaultAsync(et => et.EmployeeId == empId.Value && et.TestId == testId);
 
@@ -38,7 +98,6 @@ namespace KhaoSat.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            // Load các câu hỏi qua bảng Testquestion
             var questions = await _context.Testquestions
                 .Where(tq => tq.TestId == testId)
                 .Include(tq => tq.Question)
@@ -53,24 +112,21 @@ namespace KhaoSat.Controllers
                 .ToListAsync();
 
             ViewBag.EmployeeTestId = empTest.EmployeeTestId;
-            var test = await _context.Tests
-            .Where(t => t.TestId == empTest.TestId)
-            .FirstOrDefaultAsync();
-
+            var test = await _context.Tests.FindAsync(empTest.TestId);
             ViewBag.DurationMinutes = test?.DurationMinutes ?? 0;
+
             ViewBag.RemainingSeconds = 0;
             if (empTest.StartTime.HasValue && test?.DurationMinutes != null)
             {
-                var endTime = empTest.StartTime.Value.AddMinutes(test.DurationMinutes.Value);
-                var remain = (endTime - DateTime.Now).TotalSeconds;
-                if (remain < 0) remain = 0;
-                ViewBag.RemainingSeconds = (int)remain;
+                var remain = (empTest.StartTime.Value.AddMinutes(test.DurationMinutes.Value) - DateTime.Now).TotalSeconds;
+                ViewBag.RemainingSeconds = remain < 0 ? 0 : (int)remain;
             }
+
             return View(questions);
         }
+        #endregion
 
-        // POST: /EmployeeTests/SubmitTest
-        // POST: /Employeetests/SubmitTest
+        #region SubmitTest
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitTest(int EmployeeTestId)
@@ -96,7 +152,6 @@ namespace KhaoSat.Controllers
 
             if (empTest == null) return NotFound();
 
-            // lấy tất cả câu trả lời
             var savedAnswers = await _context.Employeeanswers
                 .Where(a => a.EmployeeTestId == EmployeeTestId)
                 .ToListAsync();
@@ -107,235 +162,36 @@ namespace KhaoSat.Controllers
             foreach (var tq in empTest.Test.Testquestions)
             {
                 var q = tq.Question;
-                double qScore = 0.0;
-
                 var userAns = savedAnswers.FirstOrDefault(a => a.QuestionId == q.QuestionId);
                 if (userAns == null) continue;
 
-                if (q.QuestionOptions.Any())
-                {
-                    var correctSet = q.QuestionOptions.Where(o => o.IsCorrect)
-                                                      .Select(o => o.OptionId.ToString())
-                                                      .ToHashSet();
-                    var selectedSet = (userAns.Answer ?? "")
-                                      .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                                      .Select(s => s.Trim()).ToHashSet();
-                    if (correctSet.SetEquals(selectedSet)) qScore = 1.0;
-                }
-                else if (q.QuestionTrueFalse != null)
-                {
-                    if (bool.TryParse(userAns.Answer, out var userVal))
-                    {
-                        if (userVal == q.QuestionTrueFalse.CorrectAnswer) qScore = 1.0;
-                    }
-                }
-                else if (q.QuestionMatchings.Any())
-                {
-                    var pairs = userAns.Answer?.Split('|', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
-                    int correct = 0, n = q.QuestionMatchings.Count();
-                    var matchings = q.QuestionMatchings.ToList();
-                    for (int i = 0; i < n && i < pairs.Length; i++)
-                    {
-                        var expected = $"{matchings[i].LeftItem}->{matchings[i].RightItem}";
-                        if (pairs[i].Contains(expected)) correct++;
-                    }
-                    if (n > 0) qScore = (double)correct / n;
-                }
-                else if (q.QuestionDragDrops.Any())
-                {
-                    var items = q.QuestionDragDrops.ToList();
-                    int n = items.Count;
-                    int correct = 0;
-                    foreach (var it in items)
-                    {
-                        if (userAns.Answer != null && userAns.Answer.Contains($"{it.DraggableText}->{it.DropTarget}"))
-                            correct++;
-                    }
-                    if (n > 0) qScore = (double)correct / n;
-                }
-                else
-                {
-                    qScore = -1; // Essay chấm sau
-                }
-
+                double qScore = CalculateQuestionScore(q, userAns.Answer);
                 userAns.Score = qScore;
                 rawScore += qScore;
+
+                // 🔹 Gọi helper cập nhật skill nếu trả lời đúng
+                if (qScore > 0)
+                {
+                    await AddEmployeeSkillIfNotExists(empTest.EmployeeId, q.SkillId);
+                }
             }
 
-            double total10 = totalQuestions > 0
-                ? Math.Round(rawScore / totalQuestions * 10.0, 2)
-                : 0.0;
-
-            empTest.TotalScore = total10;
+            empTest.TotalScore = totalQuestions > 0 ? Math.Round(rawScore / totalQuestions * 10.0, 2) : 0.0;
             empTest.EndTime = DateTime.Now;
-            if (empTest.StartTime.HasValue && empTest.Test.DurationMinutes.HasValue)
-            {
-                var deadline = empTest.StartTime.Value.AddMinutes(empTest.Test.DurationMinutes.Value);
-                empTest.Status = DateTime.Now > deadline ? "Timeout" : "Completed";
-            }
-            else empTest.Status = "Completed";
+            empTest.Status = empTest.StartTime.HasValue && empTest.Test.DurationMinutes.HasValue
+                ? (DateTime.Now > empTest.StartTime.Value.AddMinutes(empTest.Test.DurationMinutes.Value) ? "Timeout" : "Completed")
+                : "Completed";
 
             await _context.SaveChangesAsync();
 
-            // 🔹 Nếu là AJAX request → trả JSON
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
-            {
-                return Json(new { success = true, score = total10 });
-            }
+                return Json(new { success = true, score = empTest.TotalScore });
 
-            // 🔹 Nếu submit form bình thường → redirect
             return RedirectToAction("UserIndex", "Home");
         }
+        #endregion
 
-
-
-        // GET: Employeetests
-        public async Task<IActionResult> Index()
-        {
-            var appDbContext = _context.Employeetests.Include(e => e.Employee).Include(e => e.Test);
-            return View(await appDbContext.ToListAsync());
-        }
-
-        // GET: Employeetests/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeetest = await _context.Employeetests
-                .Include(e => e.Employee)
-                .Include(e => e.Test)
-                .FirstOrDefaultAsync(m => m.EmployeeTestId == id);
-            if (employeetest == null)
-            {
-                return NotFound();
-            }
-
-            return View(employeetest);
-        }
-
-        // GET: Employeetests/Create
-        public IActionResult Create()
-        {
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
-            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId");
-            return View();
-        }
-
-        // POST: Employeetests/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeTestId,EmployeeId,TestId,StartTime,EndTime,Status,TotalScore")] Employeetest employeetest)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(employeetest);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", employeetest.EmployeeId);
-            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId", employeetest.TestId);
-            return View(employeetest);
-        }
-
-        // GET: Employeetests/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeetest = await _context.Employeetests.FindAsync(id);
-            if (employeetest == null)
-            {
-                return NotFound();
-            }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", employeetest.EmployeeId);
-            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId", employeetest.TestId);
-            return View(employeetest);
-        }
-
-        // POST: Employeetests/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeTestId,EmployeeId,TestId,StartTime,EndTime,Status,TotalScore")] Employeetest employeetest)
-        {
-            if (id != employeetest.EmployeeTestId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(employeetest);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmployeetestExists(employeetest.EmployeeTestId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", employeetest.EmployeeId);
-            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId", employeetest.TestId);
-            return View(employeetest);
-        }
-
-        // GET: Employeetests/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeetest = await _context.Employeetests
-                .Include(e => e.Employee)
-                .Include(e => e.Test)
-                .FirstOrDefaultAsync(m => m.EmployeeTestId == id);
-            if (employeetest == null)
-            {
-                return NotFound();
-            }
-
-            return View(employeetest);
-        }
-
-        // POST: Employeetests/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var employeetest = await _context.Employeetests.FindAsync(id);
-            if (employeetest != null)
-            {
-                _context.Employeetests.Remove(employeetest);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool EmployeetestExists(int id)
-        {
-            return _context.Employeetests.Any(e => e.EmployeeTestId == id);
-        }
+        #region SaveAnswer
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveAnswer(int employeeTestId, int questionId, string answer)
@@ -361,7 +217,6 @@ namespace KhaoSat.Controllers
 
             if (empTest == null) return NotFound();
 
-            // 🔹 Lấy hoặc tạo mới câu trả lời
             var existing = await _context.Employeeanswers
                 .FirstOrDefaultAsync(a => a.EmployeeTestId == employeeTestId && a.QuestionId == questionId);
 
@@ -377,95 +232,136 @@ namespace KhaoSat.Controllers
 
             existing.Answer = answer;
 
-            // 🔹 Tính điểm cho câu hiện tại
             var tq = empTest.Test.Testquestions.FirstOrDefault(t => t.QuestionId == questionId);
-            double qScore = 0.0;
-
-            if (tq != null)
-            {
-                var q = tq.Question;
-
-                // --- MCQ ---
-                if (q.QuestionOptions.Any())
-                {
-                    var correctSet = q.QuestionOptions.Where(o => o.IsCorrect)
-                                                      .Select(o => o.OptionId.ToString())
-                                                      .ToHashSet();
-
-                    var selectedSet = (answer ?? "")
-                                      .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                                      .Select(s => s.Trim())
-                                      .ToHashSet();
-
-                    if (correctSet.SetEquals(selectedSet)) qScore = 1.0;
-                }
-                // --- True/False ---
-                else if (q.QuestionTrueFalse != null)
-                {
-                    if (bool.TryParse(answer, out var userVal))
-                    {
-                        if (userVal == q.QuestionTrueFalse.CorrectAnswer) qScore = 1.0;
-                    }
-                }
-                // --- Matching ---
-                else if (q.QuestionMatchings.Any())
-                {
-                    var pairs = answer?.Split('|', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
-                    int correct = 0, n = q.QuestionMatchings.Count();
-
-                    var matchings = q.QuestionMatchings.ToList();
-                    for (int i = 0; i < n && i < pairs.Length; i++)
-                    {
-                        var expected = $"{matchings[i].LeftItem}->{matchings[i].RightItem}";
-                        if (pairs[i].Contains(expected)) correct++;
-                    }
-
-                    if (n > 0) qScore = (double)correct / n;
-                }
-                // --- DragDrop ---
-                else if (q.QuestionDragDrops.Any())
-                {
-                    var items = q.QuestionDragDrops.ToList();
-                    int n = items.Count;
-                    int correct = 0;
-
-                    foreach (var it in items)
-                    {
-                        if (answer != null && answer.Contains($"{it.DraggableText}->{it.DropTarget}"))
-                            correct++;
-                    }
-
-                    if (n > 0) qScore = (double)correct / n;
-                }
-                // --- Essay ---
-                else
-                {
-                    qScore = -1; // chấm tay sau
-                }
-            }
-
+            double qScore = tq != null ? CalculateQuestionScore(tq.Question, answer) : 0.0;
             existing.Score = qScore;
 
-            // 🔹 Cập nhật luôn tổng điểm của toàn bài
+            if (qScore > 0 && tq?.Question.SkillId != null)
+            {
+                await AddEmployeeSkillIfNotExists(empTest.EmployeeId, tq.Question.SkillId);
+            }
+
             var allAnswers = await _context.Employeeanswers
                  .Where(a => a.EmployeeTestId == employeeTestId)
                  .ToListAsync();
 
             int totalQuestions = empTest.Test.Testquestions.Count;
-
-            // Fix lỗi nullable
             double rawScore = allAnswers.Sum(a => a.Score ?? 0);
-
-            double total10 = totalQuestions > 0
-                ? Math.Round(rawScore / totalQuestions * 10.0, 2)
-                : 0.0;
-
-            empTest.TotalScore = total10;
+            empTest.TotalScore = totalQuestions > 0 ? Math.Round(rawScore / totalQuestions * 10.0, 2) : 0.0;
 
             await _context.SaveChangesAsync();
 
-            return Json(new { success = true, qScore, total10 });
+            return Json(new { success = true, qScore, total10 = empTest.TotalScore });
+        }
+        #endregion
+
+        #region Standard CRUD
+        public async Task<IActionResult> Index()
+        {
+            var appDbContext = _context.Employeetests.Include(e => e.Employee).Include(e => e.Test);
+            return View(await appDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var employeetest = await _context.Employeetests
+                .Include(e => e.Employee)
+                .Include(e => e.Test)
+                .FirstOrDefaultAsync(m => m.EmployeeTestId == id);
+            if (employeetest == null) return NotFound();
+
+            return View(employeetest);
+        }
+
+        public IActionResult Create()
+        {
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
+            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("EmployeeTestId,EmployeeId,TestId,StartTime,EndTime,Status,TotalScore")] Employeetest employeetest)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(employeetest);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", employeetest.EmployeeId);
+            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId", employeetest.TestId);
+            return View(employeetest);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var employeetest = await _context.Employeetests.FindAsync(id);
+            if (employeetest == null) return NotFound();
+
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", employeetest.EmployeeId);
+            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId", employeetest.TestId);
+            return View(employeetest);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("EmployeeTestId,EmployeeId,TestId,StartTime,EndTime,Status,TotalScore")] Employeetest employeetest)
+        {
+            if (id != employeetest.EmployeeTestId) return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(employeetest);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeetestExists(employeetest.EmployeeTestId)) return NotFound();
+                    else throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", employeetest.EmployeeId);
+            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId", employeetest.TestId);
+            return View(employeetest);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var employeetest = await _context.Employeetests
+                .Include(e => e.Employee)
+                .Include(e => e.Test)
+                .FirstOrDefaultAsync(m => m.EmployeeTestId == id);
+            if (employeetest == null) return NotFound();
+
+            return View(employeetest);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var employeetest = await _context.Employeetests.FindAsync(id);
+            if (employeetest != null) _context.Employeetests.Remove(employeetest);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool EmployeetestExists(int id)
+        {
+            return _context.Employeetests.Any(e => e.EmployeeTestId == id);
+        }
+        #endregion
     }
 }

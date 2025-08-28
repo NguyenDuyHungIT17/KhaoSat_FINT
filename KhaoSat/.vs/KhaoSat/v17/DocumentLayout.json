@@ -3,20 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\middleware\\roleredirectmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\middleware\\roleredirectmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\viewmodel\\skilldashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\viewmodel\\skilldashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\controllers\\skillscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\controllers\\skillscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\controllers\\employeetestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\controllers\\employeetestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\shared\\_layoutuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\shared\\_layoutuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\employeeskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\employeeskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\controllers\\employeeanswerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\controllers\\employeeanswerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\home\\adminindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\home\\adminindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\shared\\_layoutuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\shared\\_layoutuser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,10 +79,6 @@
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\home\\adminindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\home\\adminindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\employeeanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\employeeanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,10 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\viewmodel\\questioncreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -119,14 +151,6 @@
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\employeerole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\middleware\\roleredirectmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\middleware\\roleredirectmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -137,10 +161,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\tests\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\views\\tests\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\models\\employeeskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|solutionrelative:khaosat\\models\\employeeskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{033B63DF-1EF9-42E0-AF25-7850B6FD77A8}|KhaoSat\\KhaoSat.csproj|c:\\users\\hung nguyen\\onedrive\\desktop\\khaosat\\khaosat\\khaosat\\views\\questions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -161,81 +181,42 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 637,
+          "DockedWidth": 902,
           "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RoleRedirectMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
+              "RelativeToolTip": "KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAIA4wDoAAABaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T09:54:15.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "KhaoSat\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAqwB4AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-28T02:03:38.763Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_LayoutUser.cshtml",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
-              "RelativeDocumentMoniker": "KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
-              "RelativeToolTip": "KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-27T08:56:10.898Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "KhaoSat\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAkwIAAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T06:53:26.654Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_LayoutAdmin.cshtml",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "RelativeDocumentMoniker": "KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "RelativeToolTip": "KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADQAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-25T09:56:50.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
-              "RelativeDocumentMoniker": "KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
-              "RelativeToolTip": "KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-27T06:51:34.182Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\appsettings.json",
-              "RelativeDocumentMoniker": "KhaoSat\\appsettings.json",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\appsettings.json",
-              "RelativeToolTip": "KhaoSat\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-27T07:10:39.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "AdminIndex.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Home\\AdminIndex.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Home\\AdminIndex.cshtml",
@@ -248,7 +229,121 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Employeeskill.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeeskill.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Models\\Employeeskill.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeeskill.cs",
+              "RelativeToolTip": "KhaoSat\\Models\\Employeeskill.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T08:39:13.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Models\\Employee.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employee.cs",
+              "RelativeToolTip": "KhaoSat\\Models\\Employee.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAUwB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T09:18:26.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_LayoutAdmin.cshtml",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeDocumentMoniker": "KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeToolTip": "KhaoSat\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAEUAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-25T09:56:50.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "Department.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Department.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Models\\Department.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Department.cs",
+              "RelativeToolTip": "KhaoSat\\Models\\Department.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-28T02:02:33.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Question.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Question.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Models\\Question.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Question.cs",
+              "RelativeToolTip": "KhaoSat\\Models\\Question.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T08:04:53.863Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_LayoutUser.cshtml",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
+              "RelativeDocumentMoniker": "KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
+              "RelativeToolTip": "KhaoSat\\Views\\Shared\\_LayoutUser.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-27T08:56:10.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "KhaoSat\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAkwIAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T06:53:26.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
+              "RelativeDocumentMoniker": "KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
+              "RelativeToolTip": "KhaoSat\\Views\\Employeeanswers\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-27T06:51:34.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\appsettings.json",
+              "RelativeDocumentMoniker": "KhaoSat\\appsettings.json",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\appsettings.json",
+              "RelativeToolTip": "KhaoSat\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-27T07:10:39.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "Employeeanswer.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeeanswer.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Employeeanswer.cs",
@@ -256,25 +351,11 @@
               "RelativeToolTip": "KhaoSat\\Models\\Employeeanswer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T07:53:58.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T07:53:58.254Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Question.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Question.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Models\\Question.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Question.cs",
-              "RelativeToolTip": "KhaoSat\\Models\\Question.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAUwBkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:04:53.863Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 22,
               "Title": "QuestionCreateViewModel.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\ViewModel\\QuestionCreateViewModel.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\ViewModel\\QuestionCreateViewModel.cs",
@@ -286,7 +367,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 23,
               "Title": "StartTest.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Employeetests\\StartTest.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Employeetests\\StartTest.cshtml",
@@ -298,7 +379,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 25,
               "Title": "Testquestion.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Testquestion.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Testquestion.cs",
@@ -310,7 +391,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 27,
               "Title": "TestCreateViewModel.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\ViewModel\\TestCreateViewModel.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\ViewModel\\TestCreateViewModel.cs",
@@ -322,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 26,
               "Title": "TestEditViewModel.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\ViewModel\\TestEditViewModel.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\ViewModel\\TestEditViewModel.cs",
@@ -334,7 +415,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 28,
               "Title": "QuestionCreateDto.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Dtos\\Question\\QuestionCreateDto.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Dtos\\Question\\QuestionCreateDto.cs",
@@ -346,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 32,
               "Title": "QuestionDragDrop.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\QuestionDragDrop.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\QuestionDragDrop.cs",
@@ -358,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 31,
               "Title": "QuestionMatching.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\QuestionMatching.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\QuestionMatching.cs",
@@ -370,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 30,
               "Title": "QuestionOption.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\QuestionOption.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\QuestionOption.cs",
@@ -382,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 29,
               "Title": "QuestionTrueFalse.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\QuestionTrueFalse.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\QuestionTrueFalse.cs",
@@ -394,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "Feedback.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Feedback.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Feedback.cs",
@@ -406,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 36,
               "Title": "Employeerole.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeerole.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Employeerole.cs",
@@ -418,19 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "Employee.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employee.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Models\\Employee.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employee.cs",
-              "RelativeToolTip": "KhaoSat\\Models\\Employee.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA3wEAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T09:18:26.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 38,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Program.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Program.cs",
@@ -442,19 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "RoleRedirectMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
-              "RelativeToolTip": "KhaoSat\\Middleware\\RoleRedirectMiddleware.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAYwCYAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T09:54:15.692Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 37,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Home\\Index.cshtml",
@@ -466,19 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "Employeeskill.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeeskill.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Models\\Employeeskill.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeeskill.cs",
-              "RelativeToolTip": "KhaoSat\\Models\\Employeeskill.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:39:13.949Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 42,
               "Title": "About.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Home\\About.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Home\\About.cshtml",
@@ -490,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 40,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Questions\\Create.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Questions\\Create.cshtml",
@@ -502,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 41,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Home\\Privacy.cshtml",
@@ -515,12 +560,77 @@
           ]
         },
         {
-          "DockedWidth": 605,
-          "SelectedChildIndex": 2,
+          "DockedWidth": 340,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
+              "Title": "SkillsController.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\SkillsController.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\SkillsController.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\SkillsController.cs",
+              "RelativeToolTip": "KhaoSat\\Controllers\\SkillsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-28T02:24:04.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Dashboard\\Index.cshtml",
+              "RelativeDocumentMoniker": "KhaoSat\\Views\\Dashboard\\Index.cshtml",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Dashboard\\Index.cshtml",
+              "RelativeToolTip": "KhaoSat\\Views\\Dashboard\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-28T01:58:36.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SkillDashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\ViewModel\\SkillDashboardViewModel.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Models\\ViewModel\\SkillDashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\ViewModel\\SkillDashboardViewModel.cs",
+              "RelativeToolTip": "KhaoSat\\Models\\ViewModel\\SkillDashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-28T02:54:35.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EmployeeanswersController.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeeanswersController.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\EmployeeanswersController.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeeanswersController.cs",
+              "RelativeToolTip": "KhaoSat\\Controllers\\EmployeeanswersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-27T06:30:28.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeetestsController.cs",
+              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeetestsController.cs",
+              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\EmployeetestsController.cs",
+              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeetestsController.cs",
+              "RelativeToolTip": "KhaoSat\\Controllers\\EmployeetestsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T08:02:49.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "Grade.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Employeeanswers\\Grade.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Employeeanswers\\Grade.cshtml",
@@ -528,38 +638,11 @@
               "RelativeToolTip": "KhaoSat\\Views\\Employeeanswers\\Grade.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-27T06:52:58.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-27T06:52:58.559Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EmployeeanswersController.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeeanswersController.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\EmployeeanswersController.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeeanswersController.cs",
-              "RelativeToolTip": "KhaoSat\\Controllers\\EmployeeanswersController.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAkwGYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T06:30:28.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EmployeetestsController.cs",
-              "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeetestsController.cs",
-              "RelativeDocumentMoniker": "KhaoSat\\Controllers\\EmployeetestsController.cs",
-              "ToolTip": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Controllers\\EmployeetestsController.cs",
-              "RelativeToolTip": "KhaoSat\\Controllers\\EmployeetestsController.cs",
-              "ViewState": "AgIAAIAAAAAAAAAAAAAgwI0AAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:02:49.424Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 17,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\AppDbContext.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\AppDbContext.cs",
@@ -567,12 +650,11 @@
               "RelativeToolTip": "KhaoSat\\Models\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T07:49:05.062Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-27T07:49:05.062Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "Test.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Test.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Test.cs",
@@ -580,12 +662,11 @@
               "RelativeToolTip": "KhaoSat\\Models\\Test.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T08:04:45.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T08:04:45.458Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "UserIndex.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Home\\UserIndex.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Home\\UserIndex.cshtml",
@@ -593,12 +674,11 @@
               "RelativeToolTip": "KhaoSat\\Views\\Home\\UserIndex.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAANEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-25T08:40:25.138Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T08:40:25.138Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 24,
               "Title": "Employeetest.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeetest.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Employeetest.cs",
@@ -610,7 +690,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 35,
               "Title": "Employeetraining.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\Employeetraining.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\Employeetraining.cs",
@@ -622,7 +702,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 34,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "KhaoSat\\Models\\ErrorViewModel.cs",
@@ -634,7 +714,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 39,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\HUNG NGUYEN\\OneDrive\\Desktop\\KhaoSat\\KhaoSat\\KhaoSat\\Views\\Tests\\Details.cshtml",
               "RelativeDocumentMoniker": "KhaoSat\\Views\\Tests\\Details.cshtml",
