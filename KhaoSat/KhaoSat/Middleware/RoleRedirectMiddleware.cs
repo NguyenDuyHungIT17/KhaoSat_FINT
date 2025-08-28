@@ -22,7 +22,15 @@ namespace KhaoSat.Middleware
             var empId = context.Session.GetInt32("EmployeeId");
 
             // 1. Chưa login → redirect về Login nếu truy cập trang khác
-            if (empId == null && path != "/home/login")
+            var publicPaths = new[]
+{
+                "/home/login",
+                "/account/forgotpassword",
+                "/account/resetpassword",
+                "/account/verifycode" // thêm cái này
+            };
+
+            if (empId == null && !publicPaths.Contains(path))
             {
                 context.Response.Redirect("/Home/Login");
                 return;

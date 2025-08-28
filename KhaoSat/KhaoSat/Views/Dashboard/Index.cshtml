@@ -2,6 +2,14 @@
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Dashboard</h2>
+    <a asp-controller="Dashboard" asp-action="ExportPdf" class="btn btn-danger">
+        <i class="fa fa-file-pdf"></i> Export PDF
+    </a>
+</div>
+
+<hr />
 
 <div class="container mt-4">
     <h2 class="mb-4">Dashboard - Tổng quan hệ thống</h2>

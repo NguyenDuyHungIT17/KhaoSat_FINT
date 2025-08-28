@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KhaoSat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3870e53dffe45977fb60a79a3fd1550297d4312d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+503062853011492b0c50e05fe22e5ea9e1a426b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("KhaoSat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KhaoSat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

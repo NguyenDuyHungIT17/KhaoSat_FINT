@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Xác nhận mã";
+}
+
+<h2>Nhập mã xác nhận</h2>
+
+<form method="post" asp-action="VerifyCode" asp-controller="Account">
+    <div class="form-group">
+        <label>Mã xác nhận</label>
+        <input type="text" name="code" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-success">Xác nhận</button>
+</form>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger mt-2">@TempData["Error"]</div>
+}

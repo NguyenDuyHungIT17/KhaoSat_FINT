@@ -97,7 +97,7 @@ namespace KhaoSat.Controllers
                 Email = model.Email,
                 DateOfBirth = model.DateOfBirth,
                 HireDate = model.HireDate,
-                Password = model.Password, // nếu sau này dùng hash thì thay bằng PasswordHash
+                Password = model.Password,
                 DepartmentId = model.DepartmentId,
                 LevelId = model.LevelId
             };

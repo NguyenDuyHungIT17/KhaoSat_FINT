@@ -2,6 +2,7 @@
 using KhaoSat.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -58,6 +59,25 @@ namespace KhaoSat.Controllers
 
             // Truyền model sang View
             return View(model);
+        }
+        public IActionResult ExportPdf()
+        {
+            var skills = _context.Skills
+                .Select(s => new SkillDashboardViewModel
+                {
+                    SkillId = s.SkillId,
+                    SkillName = s.Name,
+                    EmployeeNames = s.Employeeskills
+                        .Select(es => es.Employee.FullName)
+                        .ToList()
+                }).ToList();
+
+            return new ViewAsPdf("ExportPdf", skills)
+            {
+                FileName = "SkillReport.pdf",
+                PageSize = Rotativa.AspNetCore.Options.Size.A4,
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait
+            };
         }
     }
 }

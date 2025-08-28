@@ -8,33 +8,16 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <ul class="navbar-nav ms-auto flex-row">
-                <li class="nav-item">
-                    <a class="nav-link text-danger" asp-controller="Home" asp-action="Logout">Đăng xuất</a>
-                </li>
-            </ul>
-        </div>
-    </header>
+    
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">MyApp</a>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Profile" asp-action="Index">Hồ sơ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Orders" asp-action="Index">Đơn hàng</a>
-                    </li>
-                </ul>
+
+                    
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link text-danger" asp-controller="Auth" asp-action="Logout">Đăng xuất</a>
+                        <a class="nav-link text-danger" asp-controller="Home" asp-action="Logout">Đăng xuất</a>
                     </li>
                 </ul>
             </div>

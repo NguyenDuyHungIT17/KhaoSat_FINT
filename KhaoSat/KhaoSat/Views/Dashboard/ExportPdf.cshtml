@@ -1,0 +1,26 @@
+﻿@model List<KhaoSat.Models.ViewModel.SkillDashboardViewModel>
+@{
+    Layout = null; // xuất PDF thì bỏ layout chung
+}
+
+<h2 style="text-align:center; margin-bottom:20px;">BÁO CÁO KỸ NĂNG NHÂN VIÊN</h2>
+
+@foreach (var skill in Model)
+{
+    <div style="margin-bottom:20px;">
+        <h3>@skill.SkillName</h3>
+        @if (skill.EmployeeNames != null && skill.EmployeeNames.Any())
+        {
+            <ul>
+                @foreach (var emp in skill.EmployeeNames)
+                {
+                    <li>@emp</li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p><em>Chưa có nhân viên nào có skill này.</em></p>
+        }
+    </div>
+}

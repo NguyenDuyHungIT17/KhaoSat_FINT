@@ -2,31 +2,44 @@
     ViewData["Title"] = "Đăng nhập";
 }
 
-<h2>Đăng nhập</h2>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="card shadow-lg rounded-3">
+            <div class="card-header bg-primary text-white text-center">
+                <h4 class="mb-0">Đăng nhập</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/Home/Login">
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Nhập email" required />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                </form>
 
-<form method="post" action="/Home/Login">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" name="email" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label>Mật khẩu</label>
-        <input type="password" name="password" class="form-control" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Đăng nhập</button>
-</form>
+                <div class="text-center mt-3">
+                    <a asp-controller="Account" asp-action="ForgotPassword">Quên mật khẩu?</a>
+                </div>
 
-@if (Context.Items["LoginError"] != null)
-{
-    <div class="alert alert-danger mt-2">
-        @Context.Items["LoginError"]
-    </div>
-}
+                @* Thông báo lỗi *@
+                @if (Context.Items["LoginError"] != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @Context.Items["LoginError"]
+                    </div>
+                }
 
-@if (Context.Request.Query["error"] == "SaiEmailMatKhau")
-{
-    <div class="alert alert-danger">
-        Sai Email hoặc Mật khẩu
+                @if (Context.Request.Query["error"] == "SaiEmailMatKhau")
+                {
+                    <div class="alert alert-danger mt-3">
+                        Sai Email hoặc Mật khẩu
+                    </div>
+                }
+            </div>
+        </div>
     </div>
-}
-
+</div>

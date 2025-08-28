@@ -1,7 +1,9 @@
 ﻿using KhaoSat.Middleware;
 using KhaoSat.Models;
+using KhaoSat.Utils;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
+using Rotativa.AspNetCore;
 using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +24,12 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddScoped<MailHelper>();
+
 
 var app = builder.Build();
-
+RotativaConfiguration.Setup(app.Environment.WebRootPath,
+    "C:\\Program Files\\wkhtmltopdf\\bin");
 // 4. Error & HSTS
 if (!app.Environment.IsDevelopment())
 {
